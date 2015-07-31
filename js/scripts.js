@@ -1,23 +1,50 @@
-// Stats:
-// 	-Average sentiment over last 100 texts
-// 	-tweets/day (search last 500 tweets, look at the date of the oldest then do some math)
-// 	-Top related concepts (maybe also pulling up an image of each concept)
+// Function:
+// 1. Choose city from drop down menu
+// 2. Query twitter for top 3 trending topics
+// 3. Query image api to find related image for each
+// 4. On click of a topic, query twitter api for most recent
+// tweets on that topic and compile together
+ // 5. Query the alchemy api for sentiment and related concepts
+
 
 
 
 var app = {};
 var cityName;
+var cityTrends= [];
 
 app.citySelect = function(){
 	$('.city').on('click', function(evnt){
 		evnt.preventDefault();
-		$city = $(this).data('geo');
+		$cityID = $(this).data('id');
+		$cityGeo = $(this).data('geo');
 		cityName=$(this).data('city');
-		app.getTweets();
+		app.getTrends();
 
 
 	});
 };
+
+app.getTrends = function(){
+	cityTrends=[];
+	$.ajax({
+		url: 'http://localhost/twitterApp/trends_json.php',
+		type: 'GET',
+		dataType: 'jsonp',
+		data: {
+			twitter_path: 'https://api.twitter.com/1.1/trends/place.json',
+			id: $cityID,
+		},
+		success: function(trends){
+			for(var i=0;i<3;i++){
+				cityTrends[i]=trends[0].trends[i].name;
+			};
+			console.log(cityTrends);
+		}
+	})
+};
+
+
 
 app.getTweets = function(){
 	$.ajax({
@@ -26,10 +53,10 @@ app.getTweets = function(){
 		dataType: 'jsonp',
 		data: {
 			twitter_path: '1.1/search/tweets.json',		
-			// q:'"chinese food"',
+			q:'"chinese food"',
 			lang: 'en',
-			// geocode: $city,
-			// result_type: 'recent',
+			id: $city,
+			result_type: 'recent',
 			count: 75
 		},
 		success : function(tweet){
@@ -51,7 +78,7 @@ app.compileTweets = function(tweets){
 
 	// Remove all twitter handles, urls and dashes. 
 	compiledTweet = compiledTweet.replace(/\@\S+/g,"").replace(/\http\S+/g,"").replace(/\-\S+/g,"");
-	console.log(compiledTweet);
+	// console.log(compiledTweet);
 	app.analyzeSentiment(compiledTweet);
 	app.analyzeConcepts(compiledTweet);
 };
@@ -90,7 +117,6 @@ app.analyzeConcepts = function(tweetText){
 			var $conceptResponse = $('<div>');
 			var conceptList = 'The current top related concepts include:';
 			for (var i=0; i < response.concepts.length; i++) {
-				// console.log(response.concepts[i].text);
 				conceptList = conceptList + " " + response.concepts[i].text + ",";
 			}
 			var $conceptText = $('<p>');
