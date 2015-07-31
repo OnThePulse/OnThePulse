@@ -25,6 +25,7 @@ app.citySelect = function(){
 	});
 };
 
+// Get the top 3 current trending topics for the city
 app.getTrends = function(){
 	cityTrends=[];
 	$.ajax({
@@ -35,15 +36,27 @@ app.getTrends = function(){
 			twitter_path: 'https://api.twitter.com/1.1/trends/place.json',
 			id: $cityID,
 		},
-		success: function(trends){
+		success: function(response){
 			for(var i=0;i<3;i++){
-				cityTrends[i]=trends[0].trends[i].name;
+				cityTrends[i]=response[0].trends[i].name;
 			};
 			console.log(cityTrends);
+			app.showTrends(cityTrends);
 		}
 	})
 };
 
+app.showTrends = function(trends){
+	$('#trendsContainer').empty();
+	$.each(trends, function(index, trend){
+		var $trendContainer = $('<div>');
+		$trendContainer.addClass('trend');
+		var $trendName = $('<h3>');
+		$trendName.text(trend);
+		$trendContainer.append($trendName);
+		$('#trendsContainer').append($trendContainer);
+	});
+};
 
 
 app.getTweets = function(){
@@ -59,9 +72,9 @@ app.getTweets = function(){
 			result_type: 'recent',
 			count: 75
 		},
-		success : function(tweet){
-			console.log(tweet);
-			app.compileTweets(tweet);
+		success : function(response){
+			// console.log(response);
+			app.compileTweets(response);
 		}
 	})
 };
