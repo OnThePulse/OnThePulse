@@ -16,6 +16,7 @@ var flickrResponse = [];
 var trendImages = [];
 var testArray= ['Pizza', 'Ballon', 'Chess'];
 
+// Give the city selections functionality
 app.citySelect = function(){
 	$('.city').on('click', function(evnt){
 		evnt.preventDefault();
@@ -41,37 +42,43 @@ app.getTrends = function(){
 			for(var i=0;i<3;i++){
 				cityTrends[i]=response[0].trends[i].name;
 			};
-			app.getImages(cityTrends);
+			// app.getImages(cityTrends);
 			app.showTrends(cityTrends);
 		}
 	})
 };
 
-// Do a Flickr image search for each trend
-app.getImages = function(trends) {
-	flickrResponse = [];
-	for (var i = 0; i < trends.length; i++){
-		console.log(trends[i]);
-		$.ajax({
-			url: 'https://api.flickr.com/services/rest',
-			type: 'GET',
-			dataType: 'jsonp',
-			jsonp: 'jsoncallback',
-			data: {
-				api_key: '7f330be3ad01149a9f99f92363a3b84b',
-				method: 'flickr.photos.search',
-				format: 'json',
-				tags: trends[i],
-				sort: 'relevance'
-			},
-			success: function(response){
-				// console.log(response);
-				flickrResponse[i] = response;
-			}
-		});
-	};
-	app.displayImages(flickrResponse);
-};
+// // Do a Flickr image search for each trend
+// app.getImages = function(trends) {
+// 	flickrResponse = [];
+// 	for (var i = 0; i < trends.length; i++){
+// 		console.log(trends[i]);
+// 		$.ajax({
+// 			url: 'https://api.flickr.com/services/rest',
+// 			type: 'GET',
+// 			dataType: 'jsonp',
+// 			jsonp: 'jsoncallback',
+// 			data: {
+// 				api_key: '7f330be3ad01149a9f99f92363a3b84b',
+// 				method: 'flickr.photos.search',
+// 				format: 'json',
+// 				tags: trends[i],
+// 				sort: 'relevance'
+// 			},
+// 			success: function(response){
+// 				console.log(response);
+// 				flickrResponse[i] = response;
+// 				// console.log(flickrResponse);
+// 				console.log(i);
+// 				if (i===2) {
+// 					console.log(flickrResponse);
+// 					app.displayImages(flickrResponse);
+// 				};
+// 			}
+// 		});
+// 	};
+// 	// console.log(flickrResponse);
+// };
 
 // Show the trends on the page
 app.showTrends = function(trends){
@@ -91,19 +98,21 @@ app.showTrends = function(trends){
 
 
 
-// Display the first image response on the page
-app.displayImages = function(images){
-	// https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
-	$.each(images, function(index, item){
-		var farmId = item.photos.photo[0].farm;
-		var serverId = item.photos.photo[0].server;
-		var imgId = item.photos.photo[0].id;
-		var secret = item.photos.photo[0].secret;
-		var imgUrl = "https://farm"+farmId+".staticflickr.com/"+serverId+"/"+imgId+"_"+secret+".jpg";
-		$('.trendImg'+ index).attr('src', imgUrl);
-	});
-};
-
+// // Display the first image response on the page
+// app.displayImages = function(images){
+// 	console.log(images);
+// 	// https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+// 	$.each(images, function(index, item){
+// 		var farmId = item.photos.photo[0].farm;
+// 		// console.log(farmId);
+// 		var serverId = item.photos.photo[0].server;
+// 		var imgId = item.photos.photo[0].id;
+// 		var secret = item.photos.photo[0].secret;
+// 		var imgUrl = "https://farm"+farmId+".staticflickr.com/"+serverId+"/"+imgId+"_"+secret+".jpg";
+// 		console.log(umgUrl);
+// 		$('.trendImg'+ index).attr('src', imgUrl);
+// 	});
+// };
 
 
 
@@ -121,7 +130,7 @@ app.getTweets = function(){
 			q:'',
 			lang: 'en',
 			id: $city,
-			result_type: 'recent',
+			result_type: 'popular',
 			count: 75
 		},
 		success : function(response){
