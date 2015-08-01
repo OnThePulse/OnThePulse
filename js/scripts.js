@@ -7,7 +7,7 @@
  // 5. Search/display news articles relating to the trend
 
 
-
+google.load("search", "1");
 
 var app = {};
 var cityName;
@@ -75,6 +75,7 @@ app.trend0Select = function(){
 		// $('.trend1, .trend2').hide(1000);
 		$('.trend0').removeClass('col-sm-4').addClass('col-sm-12');
 		app.getTweets(cityTrends[0]);
+		app.newsSearch(cityTrends[0]);
 	});
 };
 
@@ -83,6 +84,7 @@ app.trend1Select = function(){
 		// $('.trend0, .trend2').hide(1000);
 		$('.trend1').removeClass('col-sm-4').addClass('col-sm-12');
 		app.getTweets(cityTrends[1]);
+		app.newsSearch(cityTrends[1]);
 	});
 };
 
@@ -91,10 +93,11 @@ app.trend2Select = function(){
 		// $('.trend1, .trend0').hide(1000);
 		$('.trend2').removeClass('col-sm-4').addClass('col-sm-12');
 		app.getTweets(cityTrends[2]);
+		app.newsSearch(cityTrends[2]);
 	});
 };
 
-
+//  getTweet + compileTweet + Alchemy api train *********CHOO CHOO!*********
 app.getTweets = function(trend){
 	$.ajax({
 		url : 'http://localhost/twitterApp/tweets_json.php',
@@ -176,6 +179,10 @@ app.analyzeConcepts = function(tweetText){
 		}
 
 	})
+};  // End of tweet/alchemy train *******CHOO CHOO!!*****
+
+app.newsSearch = function() {
+
 };
 
 
