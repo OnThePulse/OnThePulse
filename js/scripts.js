@@ -85,7 +85,7 @@ app.showTrends = function(trends){
 	$('#trendsContainer').empty();
 	$.each(trends, function(index, trend){
 		var $trendContainer = $('<div>');
-		$trendContainer.addClass('trend').addClass('trend'+index).addClass('col-sm-4');
+		$trendContainer.addClass('trend').addClass('trend'+index).addClass('col-sm-4').addClass('text-center');
 		var $trendImg = $('<img>');
 		$trendImg.addClass('trendImg'+index);
 		var $trendName = $('<h3>');
@@ -93,6 +93,9 @@ app.showTrends = function(trends){
 		$trendContainer.append($trendImg, $trendName);
 		$('#trendsContainer').append($trendContainer);
 	});
+	app.trend0Select();
+	app.trend1Select();
+	app.trend2Select();
 };
 
 
@@ -116,6 +119,30 @@ app.showTrends = function(trends){
 
 
 
+
+app.trend0Select = function(){
+	$('.trend0').on('click', function(){
+		$('.trend1, .trend2').hide(1000);
+		$('.trend0').removeClass('col-sm-4').addClass('col-sm-12');
+
+	});
+};
+
+app.trend1Select = function(){
+	$('.trend1').on('click', function(){
+		$('.trend0, .trend2').hide(1000);
+		$('.trend1').removeClass('col-sm-4').addClass('col-sm-12');
+		
+	});
+};
+
+app.trend2Select = function(){
+	$('.trend2').on('click', function(){
+		$('.trend1, .trend0').hide(1000);
+		$('.trend2').removeClass('col-sm-4').addClass('col-sm-12');
+		
+	});
+};
 
 
 
