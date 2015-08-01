@@ -12,6 +12,9 @@
 var app = {};
 var cityName;
 var cityTrends= [];
+var flickrResponse = [];
+var trendImages = [];
+var testArray= ['Pizza', 'Ballon', 'Chess'];
 
 app.citySelect = function(){
 	$('.city').on('click', function(evnt){
@@ -20,8 +23,6 @@ app.citySelect = function(){
 		$cityGeo = $(this).data('geo');
 		cityName=$(this).data('city');
 		app.getTrends();
-
-
 	});
 };
 
@@ -40,23 +41,74 @@ app.getTrends = function(){
 			for(var i=0;i<3;i++){
 				cityTrends[i]=response[0].trends[i].name;
 			};
-			console.log(cityTrends);
+			app.getImages(cityTrends);
 			app.showTrends(cityTrends);
 		}
 	})
 };
 
+// Do a Flickr image search for each trend
+app.getImages = function(trends) {
+	flickrResponse = [];
+	for (var i = 0; i < trends.length; i++){
+		console.log(trends[i]);
+		$.ajax({
+			url: 'https://api.flickr.com/services/rest',
+			type: 'GET',
+			dataType: 'jsonp',
+			jsonp: 'jsoncallback',
+			data: {
+				api_key: '7f330be3ad01149a9f99f92363a3b84b',
+				method: 'flickr.photos.search',
+				format: 'json',
+				tags: trends[i],
+				sort: 'relevance'
+			},
+			success: function(response){
+				// console.log(response);
+				flickrResponse[i] = response;
+			}
+		});
+	};
+	app.displayImages(flickrResponse);
+};
+
+// Show the trends on the page
 app.showTrends = function(trends){
 	$('#trendsContainer').empty();
 	$.each(trends, function(index, trend){
 		var $trendContainer = $('<div>');
-		$trendContainer.addClass('trend');
+		$trendContainer.addClass('trend').addClass('trend'+index).addClass('col-sm-4');
+		var $trendImg = $('<img>');
+		$trendImg.addClass('trendImg'+index);
 		var $trendName = $('<h3>');
 		$trendName.text(trend);
-		$trendContainer.append($trendName);
+		$trendContainer.append($trendImg, $trendName);
 		$('#trendsContainer').append($trendContainer);
 	});
 };
+
+
+
+
+// Display the first image response on the page
+app.displayImages = function(images){
+	// https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+	$.each(images, function(index, item){
+		var farmId = item.photos.photo[0].farm;
+		var serverId = item.photos.photo[0].server;
+		var imgId = item.photos.photo[0].id;
+		var secret = item.photos.photo[0].secret;
+		var imgUrl = "https://farm"+farmId+".staticflickr.com/"+serverId+"/"+imgId+"_"+secret+".jpg";
+		$('.trendImg'+ index).attr('src', imgUrl);
+	});
+};
+
+
+
+
+
+
 
 
 app.getTweets = function(){
@@ -66,7 +118,7 @@ app.getTweets = function(){
 		dataType: 'jsonp',
 		data: {
 			twitter_path: '1.1/search/tweets.json',		
-			q:'"chinese food"',
+			q:'',
 			lang: 'en',
 			id: $city,
 			result_type: 'recent',
