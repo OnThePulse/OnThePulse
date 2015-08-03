@@ -72,7 +72,7 @@ app.showTrends = function(trends){
 // tweets on that topic and compile together
 app.trend0Select = function(){
 	$('.trend0').on('click', function(){
-		// $('.trend1, .trend2').hide(1000);
+		$('.trend1, .trend2').hide(1000);
 		$('.trend0').removeClass('col-sm-4').addClass('col-sm-12');
 		app.getTweets(cityTrends[0]);
 		app.newsSearch(cityTrends[0]);
@@ -81,7 +81,7 @@ app.trend0Select = function(){
 
 app.trend1Select = function(){
 	$('.trend1').on('click', function(){
-		// $('.trend0, .trend2').hide(1000);
+		$('.trend0, .trend2').hide(1000);
 		$('.trend1').removeClass('col-sm-4').addClass('col-sm-12');
 		app.getTweets(cityTrends[1]);
 		app.newsSearch(cityTrends[1]);
@@ -90,7 +90,7 @@ app.trend1Select = function(){
 
 app.trend2Select = function(){
 	$('.trend2').on('click', function(){
-		// $('.trend1, .trend0').hide(1000);
+		$('.trend1, .trend0').hide(1000);
 		$('.trend2').removeClass('col-sm-4').addClass('col-sm-12');
 		app.getTweets(cityTrends[2]);
 		app.newsSearch(cityTrends[2]);
@@ -108,7 +108,7 @@ app.getTweets = function(trend){
 			q: trend,
 			lang: 'en',
 			geocode: $cityGeo,
-			result_type: 'popular',
+			result_type: 'mixed',
 			count: 75
 		},
 		success : function(response){
