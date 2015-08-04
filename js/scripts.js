@@ -4,7 +4,9 @@
 // 3. On click of a topic, query twitter api for most recent
 // tweets on that topic and compile together
  // 4. Query the alchemy api for sentiment and related concepts
+ 	// -> also do keyword analysis
  // 5. Search/display news articles relating to the trend
+
 
 
 google.load("search", "1");
@@ -16,15 +18,29 @@ var flickrResponse = [];
 var trendImages = [];
 var testArray= ['Pizza', 'Ballon', 'Chess'];
 
+app.infoMenu = function(){
+	$('.infoBtn').on('click', function(evnt){
+		evnt.preventDefault();
+		$('.header i').toggleClass('fa-chevron-down').toggleClass('fa-chevron-up');
+		$('.info').slideToggle();
+	})
+};
+
 // 1. Give the city selections functionality
 app.citySelect = function(){
 	$('.city').on('click', function(evnt){
 		evnt.preventDefault();
 		$('#menu').hide();
-		$('h1').removeClass('initial').addClass('post');
+		$('h1').animate({
+			fontSize: '80px',
+
+		}, 1000);
+		// $('h1').removeClass('initial').addClass('post');
 		$cityID = $(this).data('id');
 		$cityGeo = $(this).data('geo');
 		cityName=$(this).data('city');
+		$('h2').text(cityName);
+		$('h2').show();
 		app.getTrends();
 	});
 };
@@ -75,7 +91,7 @@ app.showTrends = function(trends){
 app.trend0Select = function(){
 	$('.trend0').on('click', function(){
 		$('.trend1, .trend2, .responseContainer').toggle(1000);
-		$('.trend0').removeClass('col-sm-4').addClass('col-sm-12');
+		$('.trend0').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[0]);
 		app.newsSearch(cityTrends[0]);
 		$('.responseContainer').empty()
@@ -85,7 +101,7 @@ app.trend0Select = function(){
 app.trend1Select = function(){
 	$('.trend1').on('click', function(){
 		$('.trend0, .trend2, .responseContainer').toggle(1000);
-		$('.trend1').removeClass('col-sm-4').addClass('col-sm-12');
+		$('.trend1').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[1]);
 		app.newsSearch(cityTrends[1]);
 		$('.responseContainer').empty()
@@ -95,7 +111,7 @@ app.trend1Select = function(){
 app.trend2Select = function(){
 	$('.trend2').on('click', function(){
 		$('.trend1, .trend0, .responseContainer').toggle(1000);
-		$('.trend2').removeClass('col-sm-4').addClass('col-sm-12');
+		$('.trend2').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[2]);
 		app.newsSearch(cityTrends[2]);
 		$('.responseContainer').empty()
@@ -136,8 +152,9 @@ app.compileTweets = function(tweets){
 	// Remove all twitter handles, urls and dashes. 
 	compiledTweet = compiledTweet.replace(/\@\S+/g,"").replace(/\http\S+/g,"").replace(/\-\S+/g,"");
 	console.log(compiledTweet);
+	// app.analyzeConcepts(compiledTweet);
 	app.analyzeSentiment(compiledTweet);
-	app.analyzeConcepts(compiledTweet);
+	// app.analyzeKeywords(compiledTweet);
 };
 
 app.analyzeSentiment = function(tweetText){
@@ -156,6 +173,7 @@ app.analyzeSentiment = function(tweetText){
 			$sentimentText.text("The current sentiment about this topic is "+ response.docSentiment.type + " with a score of " + response.docSentiment.score);
 			$sentimentResponse.append($sentimentText);
 			$('.responseContainer').append($sentimentResponse);
+			app.analyzeConcepts(tweetText);
 		}
 	})
 };
@@ -172,7 +190,7 @@ app.analyzeConcepts = function(tweetText){
 		},
 		success: function(response){
 			var $conceptResponse = $('<div>');
-			var conceptList = 'The current top related concepts include:';
+			var conceptList = 'The top related concepts include:';
 			for (var i=0; i < response.concepts.length; i++) {
 				conceptList = conceptList + " " + response.concepts[i].text + ",";
 			}
@@ -186,6 +204,22 @@ app.analyzeConcepts = function(tweetText){
 	})
 };  // End of tweet/alchemy train *******CHOO CHOO!!*****
 
+app.analyzeKeywords = function(tweetText){
+	$.ajax({
+		url: 'http://access.alchemyapi.com/calls/text/TextGetRankedKeywords',
+		type: 'GET',
+		dataType: 'json',
+		data: {
+			apikey: '5f798feb1fb9ee663aa54a9e10a5d9ff179408c0',
+			outputMode: 'json',
+			text:tweetText,
+			maxRetrieve: 5,
+			keywordExtractMode: 'strict'
+		}
+	})
+};
+
+
 app.newsSearch = function() {
 
 };
@@ -193,6 +227,7 @@ app.newsSearch = function() {
 
 
 app.init = function (){
+	app.infoMenu();
 	app.citySelect();
 };
 
