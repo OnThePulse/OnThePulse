@@ -172,6 +172,7 @@ body {
 
 h1 {
   font-weight: 400;
+  animation: pulse 3s infinite;
 }
 
 h2 {
@@ -213,6 +214,14 @@ h4 {
   color: white;
 }
 
+.infoBtn:visited {
+  color: white;
+}
+
+.infoBtn:active {
+  color: white;
+}
+
 .info {
   display: none;
   background: white;
@@ -251,7 +260,7 @@ h4 {
 }
 
 #menu a:hover {
-  background: black;
+  background: #212121;
   color: white;
 }
 

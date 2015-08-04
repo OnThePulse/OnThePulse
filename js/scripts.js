@@ -43,7 +43,7 @@ function searchComplete() {
   }
 }
 
-function onLoad(term) {
+function onLoad() {
 
   // Create a News Search instance.
   newsSearch = new google.search.NewsSearch();
@@ -53,14 +53,14 @@ function onLoad(term) {
   newsSearch.setSearchCompleteCallback(this, searchComplete, null);
 
   // Specify search quer(ies)
-  newsSearch.execute(term);
+  newsSearch.execute(currentTrend);
 
   // Include the required Google branding
   google.search.Search.getBranding('branding');
 }
 
 // Set a callback to call your code when the page loads
-// google.setOnLoadCallback(onLoad('Pizza'));
+
 
 
 
@@ -142,7 +142,10 @@ app.trend0Select = function(){
 		$('.trend1, .trend2, .responseContainer').toggle(1000);
 		$('.trend0').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[0]);
-		app.newsSearch(cityTrends[0]);
+		currentTrend = cityTrends[0];
+		// google.setOnLoadCallback(onLoad);
+		// app.newsSearch(cityTrends[0]);
+		app.googleNews(cityTrends[0]);
 		currentTrend = cityTrends[0];
 		$('.responseContainer').empty()
 	});
@@ -153,7 +156,10 @@ app.trend1Select = function(){
 		$('.trend0, .trend2, .responseContainer').toggle(1000);
 		$('.trend1').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[1]);
-		app.newsSearch(cityTrends[1]);
+		currentTrend = cityTrends[1];
+		// google.setOnLoadCallback(onLoad);
+		// app.newsSearch(cityTrends[1]);
+		app.googleNews(cityTrends[1]);
 		currentTrend = cityTrends[1];
 		$('.responseContainer').empty()
 	});
@@ -164,7 +170,10 @@ app.trend2Select = function(){
 		$('.trend1, .trend0, .responseContainer').toggle(1000);
 		$('.trend2').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[2]);
-		app.newsSearch(cityTrends[2]);
+		currentTrend = cityTrends[2];
+		// google.setOnLoadCallback(onLoad);
+		// app.newsSearch(cityTrends[2]);
+		app.googleNews(cityTrends[2]);
 		currentTrend = cityTrends[2];
 		$('.responseContainer').empty()
 	});
@@ -258,6 +267,7 @@ app.analyzeConcepts = function(tweetText){
 
 
 app.newsSearch = function(trend) {
+	var trendClean = trend.replace(/#/g,'');
 	$.ajax({
 		url: 'https://access.alchemyapi.com/calls/data/GetNews',
 		type: 'GET',
@@ -268,8 +278,24 @@ app.newsSearch = function(trend) {
 			start: 'now-7d',
 			end: 'now',
 			maxResults: '3',
-			'q.enriched.url.enrichedTitle.keywords.keyword.text': trend,
+			'q.enriched.url.enrichedTitle.keywords.keyword.text': trendClean,
 			return: 'enriched.url.url,enriched.url.title'
+		},
+		success: function(response){
+			console.log(response);
+		}
+	})
+};
+
+app.googleNews = function (trend){
+	var trendClean = trend.replace(/#/g,'');
+	$.ajax({
+		url: 'https://ajax.googleapis.com/ajax/services/search/news',
+		type: 'GET',
+		dataType: 'json',
+		data: {
+			q:'trendClean',
+			v: '1.0'
 		}
 	})
 };

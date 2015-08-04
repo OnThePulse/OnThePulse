@@ -13,7 +13,16 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 	box-sizing:border-box;
 } 
 /* End of setup styles */
+// --------- Keyframe animations --------
+// @keyframes pulse{
+// 	0%   { color: white; }
+// 	50% {color: red}
+// 	100% { color: white; }
+// }
 
+
+
+// -------
 body {
    	font-family: 'Lato', sans-serif;
    	background: url(../images/background.jpg);
@@ -22,6 +31,7 @@ body {
 
 h1 {
 	font-weight: 400;
+	animation: pulse 3s infinite;
 }
 h2 {
 	font-weight: 300;
@@ -40,6 +50,11 @@ h2 {
 h3 {
 	font-weight: 300;
 }
+
+
+
+
+
 h4 {
 	margin: 40px 0 20px 0;
 }
@@ -54,6 +69,12 @@ h4 {
 	padding: 20px;
 	font-size: 20px;
 	color: white;
+	&:visited{
+		color: white;
+	}
+	&:active{
+		color: white;
+	}
 }
 .info {
 	display: none;
@@ -90,7 +111,7 @@ h4 {
 	color:white;
 }
 #menu a:hover { 
-	background: black;
+	background: #212121;
 	color: white;
 }
 #menu ul li ul li a:hover { 
