@@ -20,6 +20,8 @@ var testArray= ['Pizza', 'Ballon', 'Chess'];
 app.citySelect = function(){
 	$('.city').on('click', function(evnt){
 		evnt.preventDefault();
+		$('#menu').hide();
+		$('h1').removeClass('initial').addClass('post');
 		$cityID = $(this).data('id');
 		$cityGeo = $(this).data('geo');
 		cityName=$(this).data('city');
@@ -72,28 +74,31 @@ app.showTrends = function(trends){
 // tweets on that topic and compile together
 app.trend0Select = function(){
 	$('.trend0').on('click', function(){
-		$('.trend1, .trend2').hide(1000);
+		$('.trend1, .trend2, .responseContainer').toggle(1000);
 		$('.trend0').removeClass('col-sm-4').addClass('col-sm-12');
 		app.getTweets(cityTrends[0]);
 		app.newsSearch(cityTrends[0]);
+		$('.responseContainer').empty()
 	});
 };
 
 app.trend1Select = function(){
 	$('.trend1').on('click', function(){
-		$('.trend0, .trend2').hide(1000);
+		$('.trend0, .trend2, .responseContainer').toggle(1000);
 		$('.trend1').removeClass('col-sm-4').addClass('col-sm-12');
 		app.getTweets(cityTrends[1]);
 		app.newsSearch(cityTrends[1]);
+		$('.responseContainer').empty()
 	});
 };
 
 app.trend2Select = function(){
 	$('.trend2').on('click', function(){
-		$('.trend1, .trend0').hide(1000);
+		$('.trend1, .trend0, .responseContainer').toggle(1000);
 		$('.trend2').removeClass('col-sm-4').addClass('col-sm-12');
 		app.getTweets(cityTrends[2]);
 		app.newsSearch(cityTrends[2]);
+		$('.responseContainer').empty()
 	});
 };
 
@@ -106,7 +111,7 @@ app.getTweets = function(trend){
 		data: {
 			twitter_path: '1.1/search/tweets.json',		
 			q: trend,
-			lang: 'en',
+			// lang: 'en',
 			geocode: $cityGeo,
 			result_type: 'mixed',
 			count: 75
@@ -150,7 +155,7 @@ app.analyzeSentiment = function(tweetText){
 			var $sentimentText = $('<p>');
 			$sentimentText.text("The current sentiment about this topic is "+ response.docSentiment.type + " with a score of " + response.docSentiment.score);
 			$sentimentResponse.append($sentimentText);
-			$('body').append($sentimentResponse);
+			$('.responseContainer').append($sentimentResponse);
 		}
 	})
 };
@@ -174,7 +179,7 @@ app.analyzeConcepts = function(tweetText){
 			var $conceptText = $('<p>');
 			$conceptText.text(conceptList);
 			$conceptResponse.append($conceptText);
-			$('body').append($conceptResponse);
+			$('.responseContainer').append($conceptResponse);
 			
 		}
 
