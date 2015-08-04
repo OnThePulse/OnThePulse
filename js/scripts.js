@@ -12,11 +12,59 @@
 google.load("search", "1");
 
 var app = {};
+var newsSearch;
 var cityName;
 var cityTrends= [];
 var flickrResponse = [];
 var trendImages = [];
+var currentTrend;
 var testArray= ['Pizza', 'Ballon', 'Chess'];
+
+
+
+
+function searchComplete() {
+
+  // Check that we got results
+  document.getElementById('content').innerHTML = '';
+  if (newsSearch.results && newsSearch.results.length > 0) {
+    for (var i = 0; i < newsSearch.results.length; i++) {
+
+      // Create HTML elements for search results
+      var p = document.createElement('p');
+      var a = document.createElement('a');
+      a.href="/news-search/v1/newsSearch.results[i].url;"
+      a.innerHTML = newsSearch.results[i].title;
+
+      // Append search results to the HTML nodes
+      p.appendChild(a);
+      document.body.appendChild(p);
+    }
+  }
+}
+
+function onLoad(term) {
+
+  // Create a News Search instance.
+  newsSearch = new google.search.NewsSearch();
+
+  // Set searchComplete as the callback function when a search is 
+  // complete.  The newsSearch object will have results in it.
+  newsSearch.setSearchCompleteCallback(this, searchComplete, null);
+
+  // Specify search quer(ies)
+  newsSearch.execute(term);
+
+  // Include the required Google branding
+  google.search.Search.getBranding('branding');
+}
+
+// Set a callback to call your code when the page loads
+// google.setOnLoadCallback(onLoad('Pizza'));
+
+
+
+
 
 app.infoMenu = function(){
 	$('.infoBtn').on('click', function(evnt){
@@ -41,6 +89,7 @@ app.citySelect = function(){
 		cityName=$(this).data('city');
 		$('h2').text(cityName);
 		$('h2').show();
+		$('h4').hide();
 		app.getTrends();
 	});
 };
@@ -49,7 +98,7 @@ app.citySelect = function(){
 app.getTrends = function(){
 	cityTrends=[];
 	$.ajax({
-		url: 'http://localhost/twitterApp/trends_json.php',
+		url: 'http://adamkendal.ca/twitterApp/trends_json.php',
 		type: 'GET',
 		dataType: 'jsonp',
 		data: {
@@ -94,6 +143,7 @@ app.trend0Select = function(){
 		$('.trend0').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[0]);
 		app.newsSearch(cityTrends[0]);
+		currentTrend = cityTrends[0];
 		$('.responseContainer').empty()
 	});
 };
@@ -104,6 +154,7 @@ app.trend1Select = function(){
 		$('.trend1').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[1]);
 		app.newsSearch(cityTrends[1]);
+		currentTrend = cityTrends[1];
 		$('.responseContainer').empty()
 	});
 };
@@ -114,6 +165,7 @@ app.trend2Select = function(){
 		$('.trend2').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[2]);
 		app.newsSearch(cityTrends[2]);
+		currentTrend = cityTrends[2];
 		$('.responseContainer').empty()
 	});
 };
@@ -121,7 +173,7 @@ app.trend2Select = function(){
 //  getTweet + compileTweet + Alchemy api train *********CHOO CHOO!*********
 app.getTweets = function(trend){
 	$.ajax({
-		url : 'http://localhost/twitterApp/tweets_json.php',
+		url : 'http://adamkendal.ca/twitterApp/tweets_json.php',
 		type: 'GET',
 		dataType: 'jsonp',
 		data: {
@@ -152,9 +204,7 @@ app.compileTweets = function(tweets){
 	// Remove all twitter handles, urls and dashes. 
 	compiledTweet = compiledTweet.replace(/\@\S+/g,"").replace(/\http\S+/g,"").replace(/\-\S+/g,"");
 	console.log(compiledTweet);
-	// app.analyzeConcepts(compiledTweet);
 	app.analyzeSentiment(compiledTweet);
-	// app.analyzeKeywords(compiledTweet);
 };
 
 app.analyzeSentiment = function(tweetText){
@@ -163,7 +213,7 @@ app.analyzeSentiment = function(tweetText){
 		type: 'GET',
 		dataType: 'json',
 		data: {
-			apikey: '5f798feb1fb9ee663aa54a9e10a5d9ff179408c0',
+			apikey: '2688b4b8ad81aea6d5c68644263b685f56bb0a12',
 			outputMode: 'json',
 			text:tweetText
 		},
@@ -184,7 +234,7 @@ app.analyzeConcepts = function(tweetText){
 		type: 'GET',
 		dataType: 'json',
 		data: {
-			apikey: '5f798feb1fb9ee663aa54a9e10a5d9ff179408c0',
+			apikey: '056e4cd044bcbf354af17edddb4539c7bf5a2593',
 			outputMode: 'json',
 			text:tweetText
 		},
@@ -198,30 +248,30 @@ app.analyzeConcepts = function(tweetText){
 			$conceptText.text(conceptList);
 			$conceptResponse.append($conceptText);
 			$('.responseContainer').append($conceptResponse);
+			// app.newsSearch(currentTrend);
 			
 		}
 
 	})
 };  // End of tweet/alchemy train *******CHOO CHOO!!*****
 
-app.analyzeKeywords = function(tweetText){
+
+
+app.newsSearch = function(trend) {
 	$.ajax({
-		url: 'http://access.alchemyapi.com/calls/text/TextGetRankedKeywords',
+		url: 'https://access.alchemyapi.com/calls/data/GetNews',
 		type: 'GET',
 		dataType: 'json',
 		data: {
-			apikey: '5f798feb1fb9ee663aa54a9e10a5d9ff179408c0',
+			apikey: '6bd6ba99ad69fb79d5e5fce3e46849724526e651',
 			outputMode: 'json',
-			text:tweetText,
-			maxRetrieve: 5,
-			keywordExtractMode: 'strict'
+			start: 'now-7d',
+			end: 'now',
+			maxResults: '3',
+			'q.enriched.url.enrichedTitle.keywords.keyword.text': trend,
+			return: 'enriched.url.url,enriched.url.title'
 		}
 	})
-};
-
-
-app.newsSearch = function() {
-
 };
 
 
