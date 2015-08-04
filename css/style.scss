@@ -14,11 +14,11 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 } 
 /* End of setup styles */
 // --------- Keyframe animations --------
-// @keyframes pulse{
-// 	0%   { color: white; }
-// 	50% {color: red}
-// 	100% { color: white; }
-// }
+@keyframes pulse{
+	0%   { color: white; }
+	50% {color: grey}
+	100% { color: white; }
+}
 
 
 
@@ -31,7 +31,9 @@ body {
 
 h1 {
 	font-weight: 400;
-	animation: pulse 3s infinite;
+	&:hover {
+		animation: pulse 3s infinite;
+	}
 }
 h2 {
 	font-weight: 300;

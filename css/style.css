@@ -164,6 +164,18 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 /* End of setup styles */
+@keyframes pulse {
+  0% {
+    color: white;
+  }
+  50% {
+    color: grey;
+  }
+  100% {
+    color: white;
+  }
+}
+
 body {
   font-family: 'Lato', sans-serif;
   background: url(../images/background.jpg);
@@ -172,6 +184,9 @@ body {
 
 h1 {
   font-weight: 400;
+}
+
+h1:hover {
   animation: pulse 3s infinite;
 }
 
