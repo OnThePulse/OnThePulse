@@ -8,62 +8,13 @@
  // 5. Search/display news articles relating to the trend
 
 
-
-google.load("search", "1");
-
 var app = {};
-var newsSearch;
 var cityName;
 var cityTrends= [];
 var flickrResponse = [];
 var trendImages = [];
 var currentTrend;
 var testArray= ['Pizza', 'Ballon', 'Chess'];
-
-
-
-
-function searchComplete() {
-
-  // Check that we got results
-  document.getElementById('content').innerHTML = '';
-  if (newsSearch.results && newsSearch.results.length > 0) {
-    for (var i = 0; i < newsSearch.results.length; i++) {
-
-      // Create HTML elements for search results
-      var p = document.createElement('p');
-      var a = document.createElement('a');
-      a.href="/news-search/v1/newsSearch.results[i].url;"
-      a.innerHTML = newsSearch.results[i].title;
-
-      // Append search results to the HTML nodes
-      p.appendChild(a);
-      document.body.appendChild(p);
-    }
-  }
-}
-
-function onLoad() {
-
-  // Create a News Search instance.
-  newsSearch = new google.search.NewsSearch();
-
-  // Set searchComplete as the callback function when a search is 
-  // complete.  The newsSearch object will have results in it.
-  newsSearch.setSearchCompleteCallback(this, searchComplete, null);
-
-  // Specify search quer(ies)
-  newsSearch.execute(currentTrend);
-
-  // Include the required Google branding
-  google.search.Search.getBranding('branding');
-}
-
-// Set a callback to call your code when the page loads
-
-
-
-
 
 
 app.infoMenu = function(){
@@ -143,9 +94,7 @@ app.trend0Select = function(){
 		$('.trend0').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[0]);
 		currentTrend = cityTrends[0];
-		// google.setOnLoadCallback(onLoad);
-		// app.newsSearch(cityTrends[0]);
-		app.googleNews(cityTrends[0]);
+		app.newsSearch(cityTrends[0]);
 		currentTrend = cityTrends[0];
 		$('.responseContainer').empty()
 	});
@@ -157,9 +106,7 @@ app.trend1Select = function(){
 		$('.trend1').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[1]);
 		currentTrend = cityTrends[1];
-		// google.setOnLoadCallback(onLoad);
-		// app.newsSearch(cityTrends[1]);
-		app.googleNews(cityTrends[1]);
+		app.newsSearch(cityTrends[1]);
 		currentTrend = cityTrends[1];
 		$('.responseContainer').empty()
 	});
@@ -171,9 +118,7 @@ app.trend2Select = function(){
 		$('.trend2').toggleClass('col-sm-4').toggleClass('col-sm-12');
 		app.getTweets(cityTrends[2]);
 		currentTrend = cityTrends[2];
-		// google.setOnLoadCallback(onLoad);
-		// app.newsSearch(cityTrends[2]);
-		app.googleNews(cityTrends[2]);
+		app.newsSearch(cityTrends[2]);
 		currentTrend = cityTrends[2];
 		$('.responseContainer').empty()
 	});
@@ -286,20 +231,6 @@ app.newsSearch = function(trend) {
 		}
 	})
 };
-
-app.googleNews = function (trend){
-	var trendClean = trend.replace(/#/g,'');
-	$.ajax({
-		url: 'https://ajax.googleapis.com/ajax/services/search/news',
-		type: 'GET',
-		dataType: 'json',
-		data: {
-			q:'trendClean',
-			v: '1.0'
-		}
-	})
-};
-
 
 
 app.init = function (){
