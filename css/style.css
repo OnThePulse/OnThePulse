@@ -169,7 +169,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
     color: white;
   }
   50% {
-    color: grey;
+    color: #444444;
   }
   100% {
     color: white;
@@ -187,7 +187,7 @@ h1 {
 }
 
 h1:hover {
-  animation: pulse 3s infinite;
+  animation: pulse 4s infinite;
 }
 
 h2 {
