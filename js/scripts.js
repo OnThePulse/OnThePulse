@@ -14,7 +14,8 @@ var cityTrends= [];
 var flickrResponse = [];
 var trendImages = [];
 var currentTrend;
-var testArray= ['Pizza', 'Ballon', 'Chess'];
+var newsObject;
+var testArray = ['Pizza', 'Ballon', 'Chess'];
 
 
 app.infoMenu = function(){
@@ -218,7 +219,7 @@ app.newsSearch = function(trend) {
 		type: 'GET',
 		dataType: 'json',
 		data: {
-			apikey: '6bd6ba99ad69fb79d5e5fce3e46849724526e651',
+			apikey: '5f798feb1fb9ee663aa54a9e10a5d9ff179408c0',
 			outputMode: 'json',
 			start: 'now-7d',
 			end: 'now',
@@ -228,6 +229,14 @@ app.newsSearch = function(trend) {
 		},
 		success: function(response){
 			console.log(response);
+			var $newsResponse = $('<div>');
+			for (var i=0; i < response.result.docs.length;i++) {
+				var $newsItem = $('<a>');
+				$newsItem.text(response.result.docs[i].source.enriched.url.title);
+				$newsResponse.append($newsItem);
+			};
+			$('.responseContainer').append($newsResponse);
+			
 		}
 	})
 };
