@@ -204,7 +204,6 @@ h1.post {
 
 h2 {
   font-size: 40px;
-  padding: 25px 0;
   display: none;
 }
 
@@ -234,6 +233,10 @@ h4 {
 }
 
 .infoBtn:active {
+  color: white;
+}
+
+.infoBtn:hover {
   color: white;
 }
 
@@ -350,4 +353,30 @@ h4 {
 
 .responseContainer {
   display: none;
+}
+
+.googleContainer {
+  display: none;
+}
+
+.googleSearch {
+  color: white;
+  text-decoration: none;
+  background: grey;
+  font-size: 20px;
+  position: relative;
+  top: 20px;
+  padding: 3px;
+  border: 1px solid white;
+}
+
+.googleSearch:hover {
+  background: black;
+  color: white;
+  text-decoration: none;
+}
+
+.googleSearch:active {
+  color: white;
+  text-decoration: none;
 }

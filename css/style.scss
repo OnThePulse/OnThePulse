@@ -34,7 +34,7 @@ h1.post {
 }
 h2 {
 	font-size: 40px;
-	padding: 25px 0;
+	// padding: 25px 0;
 	display: none;
 }
 h3 {
@@ -65,6 +65,9 @@ h4 {
 	&:active{
 		color: white;
 	}
+    &:hover{
+        color: white;
+    }
 }
 .info {
 	display: none;
@@ -169,8 +172,28 @@ h4 {
 .responseContainer{
 	display: none;
 }
-
-
+.googleContainer {
+    display: none;
+}
+.googleSearch {
+    color: white;
+    text-decoration: none; 
+    background: grey;
+    font-size: 20px;
+    position:relative;
+    top: 20px;
+    padding: 3px;
+    border: 1px solid white;
+    &:hover {
+        background: black;
+        color: white;
+        text-decoration: none; 
+    }
+    &:active {
+        color: white;
+        text-decoration: none; 
+    }
+}
 
 
 

@@ -91,36 +91,39 @@ app.showTrends = function(trends){
 // tweets on that topic and compile together
 app.trend0Select = function(){
 	$('.trend0').on('click', function(){
-		$('.trend1, .trend2, .responseContainer').toggle(1000);
+		$('.trend1, .trend2, .responseContainer, .googleContainer').toggle(1000);
 		$('.trend0').toggleClass('col-sm-4').toggleClass('col-sm-12');
-		app.getTweets(cityTrends[0]);
 		currentTrend = cityTrends[0];
-		app.newsSearch(cityTrends[0]);
-		currentTrend = cityTrends[0];
+		app.getTweets(currentTrend);
+		// app.newsSearch(currentTrend);
+		app.nytSearch(currentTrend);
+		app.googleSearch(currentTrend);
 		$('.responseContainer').empty()
 	});
 };
 
 app.trend1Select = function(){
 	$('.trend1').on('click', function(){
-		$('.trend0, .trend2, .responseContainer').toggle(1000);
+		$('.trend0, .trend2, .responseContainer, .googleContainer').toggle(1000);
 		$('.trend1').toggleClass('col-sm-4').toggleClass('col-sm-12');
-		app.getTweets(cityTrends[1]);
 		currentTrend = cityTrends[1];
-		app.newsSearch(cityTrends[1]);
-		currentTrend = cityTrends[1];
+		app.getTweets(currentTrend);
+		// app.newsSearch(currentTrend);
+		app.nytSearch(currentTrend);
+		app.googleSearch(currentTrend);
 		$('.responseContainer').empty()
 	});
 };
 
 app.trend2Select = function(){
 	$('.trend2').on('click', function(){
-		$('.trend1, .trend0, .responseContainer').toggle(1000);
+		$('.trend1, .trend0, .responseContainer, .googleContainer').toggle(1000);
 		$('.trend2').toggleClass('col-sm-4').toggleClass('col-sm-12');
-		app.getTweets(cityTrends[2]);
 		currentTrend = cityTrends[2];
-		app.newsSearch(cityTrends[2]);
-		currentTrend = cityTrends[2];
+		app.getTweets(currentTrend);
+		// app.newsSearch(currentTrend);
+		app.nytSearch(currentTrend);
+		app.googleSearch(currentTrend);
 		$('.responseContainer').empty()
 	});
 };
@@ -177,7 +180,7 @@ app.analyzeSentiment = function(tweetText){
 			var $sentimentText = $('<p>');
 			$sentimentText.text("The current sentiment about this topic is "+ response.docSentiment.type + " with a score of " + response.docSentiment.score);
 			$sentimentResponse.append($sentimentText);
-			$('.responseContainer').append($sentimentResponse);
+			$('.responseContainer').prepend($sentimentResponse);
 			app.analyzeConcepts(tweetText);
 		}
 	})
@@ -202,7 +205,7 @@ app.analyzeConcepts = function(tweetText){
 			var $conceptText = $('<p>');
 			$conceptText.text(conceptList);
 			$conceptResponse.append($conceptText);
-			$('.responseContainer').append($conceptResponse);
+			$('.responseContainer p').after($conceptResponse);
 			// app.newsSearch(currentTrend);
 			
 		}
@@ -214,14 +217,16 @@ app.analyzeConcepts = function(tweetText){
 
 app.newsSearch = function(trend) {
 	var trendClean = trend.replace(/#/g,'');
+	trendClean = trendClean.replace(/([a-z])([A-Z])/g, '$1 $2');
 	$.ajax({
 		url: 'https://access.alchemyapi.com/calls/data/GetNews',
 		type: 'GET',
 		dataType: 'json',
 		data: {
 			apikey: '5f798feb1fb9ee663aa54a9e10a5d9ff179408c0',
+			// apikey: '683e36423c68028f35d179e24943f3e8ab0e43d4',
 			outputMode: 'json',
-			start: 'now-7d',
+			start: 'now-30d',
 			end: 'now',
 			maxResults: '3',
 			'q.enriched.url.enrichedTitle.keywords.keyword.text': trendClean,
@@ -232,14 +237,46 @@ app.newsSearch = function(trend) {
 			var $newsResponse = $('<div>');
 			for (var i=0; i < response.result.docs.length;i++) {
 				var $newsItem = $('<a>');
-				$newsItem.text(response.result.docs[i].source.enriched.url.title);
+				$newsItem.text(response.result.docs[i].source.enriched.url.title).attr('href', response.result.docs[i].source.enriched.url.url);
 				$newsResponse.append($newsItem);
 			};
-			$('.responseContainer').append($newsResponse);
+			$('.alchemyNews').append($newsResponse);
 			
 		}
 	})
 };
+
+app.nytSearch = function(trend) {
+	var trendClean = trend.replace(/#/g,'');
+	trendClean = trendClean.replace(/([a-z])([A-Z])/g, '$1 $2');
+	console.log(trendClean);
+	$.ajax({
+		url:'http://api.nytimes.com/svc/search/v2/articlesearch.json',
+		type: 'GET',
+		dataType: 'json',
+		data: {
+			'api-key': '508b7350bc5f2988e72a8006250c508c:6:72641991',
+			'response-format': 'json',
+			'q': trendClean
+		},
+		success: function (response) {
+			console.log(response);
+			var $newsResponse = $('<div>');
+			for (var i=0; i < 4;i++) {
+				var $newsItem = $('<a>');
+				$newsItem.text(response.response.docs[i].headline.main);
+				$newsResponse.append($newsItem);
+			};
+			$('.responseContainer').append($newsResponse);
+		}
+	});
+}
+
+app.googleSearch = function(trend) {
+	var trendClean = trend.replace(/#/g,'');
+	var googleUrl = 'https://www.google.ca/search?q='+trendClean+'&oq=create&aqs=chrome.0.69i59l2j69i60j69i65l2j69i61.741j0j9&sourceid=chrome&es_sm=91&ie=UTF-8';
+	$('.googleSearch').attr('href',googleUrl);
+}
 
 
 app.init = function (){
