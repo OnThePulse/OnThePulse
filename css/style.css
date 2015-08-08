@@ -184,6 +184,7 @@ body {
 
 h1 {
   font-weight: 400;
+  letter-spacing: 7px;
 }
 
 h1:hover {
@@ -192,6 +193,7 @@ h1:hover {
 
 h2 {
   font-weight: 300;
+  letter-spacing: 1px;
 }
 
 h1.initial {
@@ -209,6 +211,7 @@ h2 {
 
 h3 {
   font-weight: 300;
+  letter-spacing: 1px;
 }
 
 h4 {
@@ -357,6 +360,14 @@ h4 {
 
 .googleContainer {
   display: none;
+}
+
+.trend h3 {
+  background: black;
+  padding: 5px;
+  width: 300px;
+  display: inline-block;
+  margin: 20px auto;
 }
 
 .googleSearch {

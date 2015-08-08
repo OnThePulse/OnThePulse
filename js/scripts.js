@@ -1,13 +1,3 @@
-// Function:
-// 1. Choose city from drop down menu
-// 2. Query twitter for top 3 trending topics
-// 3. On click of a topic, query twitter api for most recent
-// tweets on that topic and compile together
- // 4. Query the alchemy api for sentiment and related concepts
- 	// -> also do keyword analysis
- // 5. Search/display news articles relating to the trend
-
-
 var app = {};
 var cityName;
 var cityTrends= [];
@@ -41,7 +31,7 @@ app.citySelect = function(){
 		cityName=$(this).data('city');
 		$('h2').text(cityName);
 		$('h2').show();
-		$('h4').hide();
+		$('h4').text('Click on a trend to find out more.');
 		app.getTrends();
 	});
 };
