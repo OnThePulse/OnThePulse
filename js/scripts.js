@@ -239,6 +239,7 @@ app.newsSearch = function(trend) {
 app.nytSearch = function(trend) {
 	var trendClean = trend.replace(/#/g,'');
 	trendClean = trendClean.replace(/([a-z])([A-Z])/g, '$1 $2');
+	trendClean = '"'+trendClean+'"';
 	console.log(trendClean);
 	$.ajax({
 		url:'http://api.nytimes.com/svc/search/v2/articlesearch.json',
