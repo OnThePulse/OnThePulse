@@ -384,9 +384,13 @@ h4 {
 
 .googleContainer {
   display: none;
+  margin: 20px 0;
 }
 
 .trend h3 {
+  border-top: solid 1px #292929;
+  border-bottom: solid 1px #292929;
+  border-radius: 5px;
   background: black;
   padding: 5px;
   width: 300px;
@@ -397,12 +401,13 @@ h4 {
 .googleSearch {
   color: white;
   text-decoration: none;
-  background: grey;
-  font-size: 20px;
-  position: relative;
-  top: 20px;
-  padding: 3px;
-  border: 1px solid white;
+  background: black;
+  font-size: 16px;
+  padding: 3px 10px;
+  border-top: solid 1px #292929;
+  border-bottom: solid 1px #292929;
+  font-weight: 300;
+  margin-bottom: 10px;
 }
 
 .googleSearch:hover {

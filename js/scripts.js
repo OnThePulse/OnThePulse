@@ -252,7 +252,7 @@ app.nytSearch = function(trend) {
 		success: function (response) {
 			console.log(response);
 			var $newsResponse = $('<div>');
-			for (var i=0; i < 4;i++) {
+			for (var i=0; i < 3;i++) {
 				var $newsBox = $('<div>');
 				var $newsItem = $('<a>');
 				$newsItem.text(response.response.docs[i].headline.main).attr('href', response.response.docs[i].web_url).attr('target','_blank');
