@@ -253,9 +253,11 @@ app.nytSearch = function(trend) {
 			console.log(response);
 			var $newsResponse = $('<div>');
 			for (var i=0; i < 4;i++) {
+				var $newsBox = $('<div>');
 				var $newsItem = $('<a>');
-				$newsItem.text(response.response.docs[i].headline.main);
-				$newsResponse.append($newsItem);
+				$newsItem.text(response.response.docs[i].headline.main).attr('href', response.response.docs[i].web_url).attr('target','_blank');
+				$newsBox.append($newsItem);
+				$newsResponse.append($newsBox);
 			};
 			$('.responseContainer').append($newsResponse);
 		}
