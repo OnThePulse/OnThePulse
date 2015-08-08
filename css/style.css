@@ -280,12 +280,12 @@ h4 {
   color: white;
 }
 
-#menu a:hover {
+#menu a:hover, a:focus {
   background: #212121;
   color: white;
 }
 
-#menu ul li ul li a:hover {
+#menu ul li ul li a:hover, a:focus {
   background: black;
   color: white;
   padding-left: 9px;
@@ -336,7 +336,17 @@ h4 {
   width: 140px;
 }
 
+#menu ul li ul, #menu:focus ul li ul, #menu:focus ul li:focus ul li ul {
+  display: none;
+  list-style-type: none;
+  width: 140px;
+}
+
 #menu:hover ul, #menu:hover ul li:hover ul, #menu:hover ul li:hover ul li:hover ul {
+  display: block;
+}
+
+#menu:hover ul, #menu:focus ul li:focus ul, #menu:focus ul li:hover ul li:focus ul {
   display: block;
 }
 
@@ -347,7 +357,21 @@ h4 {
   font: 10px;
 }
 
+#menu:focus ul li:focus ul li:focus ul {
+  position: absolute;
+  margin-left: 145px;
+  margin-top: -22px;
+  font: 10px;
+}
+
 #menu:hover ul li:hover ul {
+  position: absolute;
+  margin-top: 1px;
+  font: 10px;
+  bottom: 100%;
+}
+
+#menu:focus ul li:focus ul {
   position: absolute;
   margin-top: 1px;
   font: 10px;
