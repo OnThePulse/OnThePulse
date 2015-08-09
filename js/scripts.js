@@ -11,10 +11,23 @@ var testArray = ['Pizza', 'Ballon', 'Chess'];
 app.infoMenu = function(){
 	$('.infoBtn').on('click', function(evnt){
 		evnt.preventDefault();
-		$('.header i').toggleClass('fa-chevron-down').toggleClass('fa-chevron-up');
+		$('.infoBtn i').toggleClass('fa-chevron-down').toggleClass('fa-chevron-up');
 		$('.info').slideToggle();
+	});
+	$('.refreshBtn').on('click', function(evnt) {
+		evnt.preventDefault();
+		// document.location.reload(true);
+		$('h1').animate({
+			fontSize: '130px',
+
+		}, 1000);
+		$('#menu').show();
+		$('h2').hide();
+		$('h4').text('Find out what cities are talking about and how they feel in real time.');
+		$('#trendsContainer').empty();
 	})
 };
+
 
 // 1. Give the city selections functionality
 app.citySelect = function(){
@@ -263,6 +276,22 @@ app.nytSearch = function(trend) {
 			$('.responseContainer').append($newsResponse);
 		}
 	});
+}
+
+app.bingNewsSearch = function(trend) {
+	$.ajax({
+		url:'https://api.datamarket.azure.com/Bing/Search/Web?Query=%27Xbox%27&$format=json',
+		type: 'GET',
+		dataType: 'jsonp',
+		data: {
+			// Appid: '5iKiicIzdChbjnJltroylQ7Zvc3H4X3d8HbUdc7nJHk',
+			// query: 'trend',
+			// $format: 'json'
+		},
+		success: function(response) {
+			console.log(response);
+		}
+	})
 }
 
 app.googleSearch = function(trend) {

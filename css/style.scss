@@ -53,21 +53,26 @@ h4 {
 	background: black;
 	height: 35px;
 }
-.infoBtn {
-	position: relative;
-	left: 40%;
-	padding: 20px;
-	font-size: 20px;
-	color: white;
-	&:visited{
-		color: white;
-	}
-	&:active{
-		color: white;
-	}
+.headerBtn{
+    position: relative;
+    padding: 20px 20px 9px 20px;
+    font-size: 20px;
+    color: white;
+    &:visited{
+        color: white;
+    }
+    &:active{
+        color: white;
+    }
     &:hover{
         color: white;
     }
+}
+.infoBtn {
+	left: 40%;
+}
+.refreshBtn {
+    left: 38%;
 }
 .info {
 	display: none;

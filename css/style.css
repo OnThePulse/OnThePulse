@@ -223,24 +223,31 @@ h4 {
   height: 35px;
 }
 
-.infoBtn {
+.headerBtn {
   position: relative;
-  left: 40%;
-  padding: 20px;
+  padding: 20px 20px 9px 20px;
   font-size: 20px;
   color: white;
 }
 
-.infoBtn:visited {
+.headerBtn:visited {
   color: white;
 }
 
-.infoBtn:active {
+.headerBtn:active {
   color: white;
 }
 
-.infoBtn:hover {
+.headerBtn:hover {
   color: white;
+}
+
+.infoBtn {
+  left: 40%;
+}
+
+.refreshBtn {
+  left: 38%;
 }
 
 .info {
