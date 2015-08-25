@@ -17,7 +17,11 @@ app.infoMenu = function(){
 	$('.refreshBtn').on('click', function(evnt) {
 		evnt.preventDefault();
 		// document.location.reload(true);
-		$('h1').animate({
+		$('#onthe').animate({
+			fontSize: '80px',
+
+		}, 1000);
+		$('#pulse').animate({
 			fontSize: '130px',
 
 		}, 1000);
@@ -34,7 +38,11 @@ app.citySelect = function(){
 	$('.city').on('click', function(evnt){
 		evnt.preventDefault();
 		$('#menu').hide();
-		$('h1').animate({
+		$('#onthe').animate({
+			fontSize: '40px',
+
+		}, 1000);
+		$('#pulse').animate({
 			fontSize: '80px',
 
 		}, 1000);
@@ -44,7 +52,7 @@ app.citySelect = function(){
 		cityName=$(this).data('city');
 		$('h2').text(cityName);
 		$('h2').show();
-		$('h4').text('Click on a trend to find out more.');
+		$('h4').text('SELECT A TREND');
 		app.getTrends();
 	});
 };

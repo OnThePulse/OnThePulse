@@ -24,6 +24,12 @@ h1 {
 		animation: pulse 4s infinite;
 	}
 }
+#onthe {
+    font-size: 80px;
+}
+ #pulse {
+        letter-spacing: 26px;
+    }
 h2 {
 	font-weight: 300;
     letter-spacing: 1px;
@@ -42,10 +48,12 @@ h2 {
 h3 {
 	font-weight: 300;
     letter-spacing: 1px;
+    font-size: 20px;
 }
 
 h4 {
 	margin: 40px 0 20px 0;
+    font-size: 16px;
 }
 
 // --------- Drop down header style -----------

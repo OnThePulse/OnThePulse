@@ -178,7 +178,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 
 body {
   font-family: 'Lato', sans-serif;
-  background: url(../images/background.jpg);
+  background: url(../images/circlebackground3.jpg) repeat;
   color: white;
 }
 
@@ -189,6 +189,14 @@ h1 {
 
 h1:hover {
   animation: pulse 4s infinite;
+}
+
+#onthe {
+  font-size: 80px;
+}
+
+#pulse {
+  letter-spacing: 26px;
 }
 
 h2 {
@@ -207,15 +215,19 @@ h1.post {
 h2 {
   font-size: 40px;
   display: none;
+  margin: 0;
 }
 
 h3 {
   font-weight: 300;
   letter-spacing: 1px;
+  font-size: 20px;
 }
 
 h4 {
   margin: 40px 0 20px 0;
+  font-size: 16px;
+  margin: 0;
 }
 
 .btnContainer {
@@ -259,7 +271,9 @@ h4 {
 .info p {
   padding: 15px;
 }
-
+.menu-container {
+  margin-top: 10vh;
+}
 #menu * {
   padding: 0;
   margin: 0;

@@ -1,0 +1,17 @@
+{
+  "name": "theme-hackeryou",
+  "version": "1.0.0",
+  "description": "A starter HackerYou theme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.3.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-sass": "^2.0.1"
+  }
+}
