@@ -26,6 +26,7 @@ app.infoMenu = function(){
 
 		}, 1000);
 		$('#menu').show();
+		$('h1').show();
 		$('h2').hide();
 		$('h4').text('Find out what cities are talking about and how they feel in real time.');
 		$('#trendsContainer').empty();
@@ -37,6 +38,10 @@ app.infoMenu = function(){
 app.citySelect = function(){
 	$('.city').on('click', function(evnt){
 		evnt.preventDefault();
+		$cityID = $(this).data('id');
+		$cityGeo = $(this).data('geo');
+		cityName=$(this).data('city');
+		$('.container h2').text(cityName).addClass('city-name');
 		$('#menu').hide();
 		$('#onthe').animate({
 			fontSize: '40px',
@@ -45,14 +50,11 @@ app.citySelect = function(){
 		$('#pulse').animate({
 			fontSize: '80px',
 
-		}, 1000);
-		// $('h1').removeClass('initial').addClass('post');
-		$cityID = $(this).data('id');
-		$cityGeo = $(this).data('geo');
-		cityName=$(this).data('city');
-		$('h2').text(cityName);
+		}, 1000, function() {
+			$('h1').hide();
 		$('h2').show();
 		$('h4').text('SELECT A TREND');
+		});
 		app.getTrends();
 	});
 };
@@ -84,7 +86,7 @@ app.showTrends = function(trends){
 	$('#trendsContainer').empty();
 	$.each(trends, function(index, trend){
 		var $trendContainer = $('<div>');
-		$trendContainer.addClass('trend').addClass('trend'+index).addClass('col-sm-4').addClass('text-center');
+		$trendContainer.addClass('trend').addClass('trend'+index).addClass('col-md-4').addClass('text-center');
 		var $trendImg = $('<img>');
 		$trendImg.addClass('trendImg'+index);
 		var $trendName = $('<h3>');
@@ -103,7 +105,7 @@ app.showTrends = function(trends){
 app.trend0Select = function(){
 	$('.trend0').on('click', function(){
 		$('.trend1, .trend2, .responseContainer, .googleContainer').toggle(1000);
-		$('.trend0').toggleClass('col-sm-4').toggleClass('col-sm-12');
+		$('.trend0').toggleClass('col-md-4').toggleClass('col-sm-12');
 		currentTrend = cityTrends[0];
 		app.getTweets(currentTrend);
 		// app.newsSearch(currentTrend);
@@ -116,7 +118,7 @@ app.trend0Select = function(){
 app.trend1Select = function(){
 	$('.trend1').on('click', function(){
 		$('.trend0, .trend2, .responseContainer, .googleContainer').toggle(1000);
-		$('.trend1').toggleClass('col-sm-4').toggleClass('col-sm-12');
+		$('.trend1').toggleClass('col-md-4').toggleClass('col-sm-12');
 		currentTrend = cityTrends[1];
 		app.getTweets(currentTrend);
 		// app.newsSearch(currentTrend);
@@ -129,7 +131,7 @@ app.trend1Select = function(){
 app.trend2Select = function(){
 	$('.trend2').on('click', function(){
 		$('.trend1, .trend0, .responseContainer, .googleContainer').toggle(1000);
-		$('.trend2').toggleClass('col-sm-4').toggleClass('col-sm-12');
+		$('.trend2').toggleClass('col-md-4').toggleClass('col-sm-12');
 		currentTrend = cityTrends[2];
 		app.getTweets(currentTrend);
 		// app.newsSearch(currentTrend);

@@ -215,7 +215,6 @@ h1.post {
 h2 {
   font-size: 40px;
   display: none;
-  margin: 0;
 }
 
 h3 {
@@ -227,11 +226,13 @@ h3 {
 h4 {
   margin: 40px 0 20px 0;
   font-size: 16px;
-  margin: 0;
+}
+
+.header {
+  background: black;
 }
 
 .btnContainer {
-  background: black;
   height: 35px;
 }
 
@@ -271,9 +272,7 @@ h4 {
 .info p {
   padding: 15px;
 }
-.menu-container {
-  margin-top: 10vh;
-}
+
 #menu * {
   padding: 0;
   margin: 0;
@@ -397,6 +396,14 @@ h4 {
   margin-top: 1px;
   font: 10px;
   bottom: 100%;
+}
+
+.header-title {
+  font-size: 30px;
+}
+
+.city-name {
+  font-size: 80px;
 }
 
 .responseContainer {

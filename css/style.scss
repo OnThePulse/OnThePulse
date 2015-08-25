@@ -13,7 +13,7 @@
 // -------
 body {
    	font-family: 'Lato', sans-serif;
-   	background: url(../images/background.jpg);
+   	background: url(../images/circlebackground3.jpg) repeat;
    	color: white;
    }
 
@@ -57,8 +57,10 @@ h4 {
 }
 
 // --------- Drop down header style -----------
+.header {
+    background: black;
+}
 .btnContainer {
-	background: black;
 	height: 35px;
 }
 .headerBtn{
@@ -202,6 +204,12 @@ h4 {
 
 
 // --------- Response Styles -------------
+.header-title {
+    font-size: 30px;
+}
+.city-name {
+    font-size: 80px;
+}
 .responseContainer{
 	display: none;
 }
