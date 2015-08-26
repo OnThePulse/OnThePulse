@@ -16,20 +16,20 @@ app.infoMenu = function(){
 	});
 	$('.refreshBtn').on('click', function(evnt) {
 		evnt.preventDefault();
-		// document.location.reload(true);
-		$('#onthe').animate({
-			fontSize: '80px',
+		document.location.reload(true);
+		// $('#onthe').animate({
+		// 	fontSize: '80px',
 
-		}, 1000);
-		$('#pulse').animate({
-			fontSize: '130px',
+		// }, 1000);
+		// $('#pulse').animate({
+		// 	fontSize: '130px',
 
-		}, 1000);
-		$('#menu').show();
-		$('h1').show();
-		$('h2').hide();
-		$('h4').text('Find out what cities are talking about and how they feel in real time.');
-		$('#trendsContainer').empty();
+		// }, 1000);
+		// $('#menu').show();
+		// $('h1').show();
+		// $('h2').hide();
+		// $('h4').text('Find out what cities are talking about and how they feel in real time.');
+		// $('#trendsContainer').empty();
 	})
 };
 
