@@ -190,7 +190,7 @@ h1 {
 }
 
 h1:hover {
-  animation: pulse 4s infinite;
+  animation: pulse 3s infinite;
 }
 
 #onthe {
@@ -214,6 +214,10 @@ h1:hover {
 h2 {
   font-weight: 300;
   letter-spacing: 1px;
+}
+
+h2:hover {
+  animation: pulse 3s infinite;
 }
 
 h2 {
@@ -252,6 +256,7 @@ h4 {
   padding: 20px 20px 9px 20px;
   font-size: 20px;
   color: white;
+  left: 35%;
 }
 
 .headerBtn:visited {
@@ -263,15 +268,7 @@ h4 {
 }
 
 .headerBtn:hover {
-  color: white;
-}
-
-.infoBtn {
-  left: 35%;
-}
-
-.refreshBtn {
-  left: 35%;
+  color: grey;
 }
 
 .info {
@@ -440,6 +437,7 @@ h4 {
 }
 
 .responseContainer a {
+  color: #666;
   display: inline-block;
   margin-bottom: 10px;
 }

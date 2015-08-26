@@ -5,6 +5,7 @@
 @keyframes pulse{
 	0%   { color: white; }
 	50% {color: #444444}
+    // 50% {color: #27BDBA}
 	100% { color: white; }
 }
 
@@ -24,7 +25,7 @@ h1 {
     padding-left: 30px;
     padding-right: 30px;
 	&:hover {
-		animation: pulse 4s infinite;
+		animation: pulse 3s infinite;
 	}
 }
 #onthe {
@@ -46,6 +47,9 @@ h1 {
 h2 {
 	font-weight: 300;
     letter-spacing: 1px;
+    &:hover {
+        animation: pulse 3s infinite;
+    }
 }
 
 
@@ -86,6 +90,8 @@ h4 {
     padding: 20px 20px 9px 20px;
     font-size: 20px;
     color: white;
+    left: 35%;
+    // float:right;
     &:visited{
         color: white;
     }
@@ -93,15 +99,10 @@ h4 {
         color: white;
     }
     &:hover{
-        color: white;
+        color: grey;
     }
 }
-.infoBtn {
-	left: 35%;
-}
-.refreshBtn {
-    left: 35%;
-}
+
 .info {
 	display: none;
 	background: white;
@@ -247,6 +248,7 @@ h4 {
         padding-bottom: 20px;
     }
     a {
+        color: #666;
         display: inline-block;
         margin-bottom: 10px;
     }
