@@ -253,7 +253,7 @@ h4 {
 
 .headerBtn {
   position: relative;
-  padding: 20px 20px 9px 20px;
+  padding: 0 20px;
   font-size: 20px;
   color: white;
   left: 35%;
@@ -320,7 +320,6 @@ h4 {
 #menu ul li ul li a:hover, a:focus {
   background: black;
   color: white;
-  padding-left: 9px;
   border-left: solid 1px #000;
 }
 
