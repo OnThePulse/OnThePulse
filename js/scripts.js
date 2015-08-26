@@ -192,7 +192,9 @@ app.analyzeSentiment = function(tweetText){
 		success: function(response){
 			var $sentimentResponse = $('<div>');
 			var $sentimentText = $('<p>');
-			$sentimentText.text("Current mood: "+ response.docSentiment.type + " " + response.docSentiment.score);
+			var score = Number(response.docSentiment.score).toFixed(2);
+			var scorePercent = (score*100) + "%";
+			$sentimentText.text("Current mood: "+ response.docSentiment.type + " " + scorePercent);
 			$sentimentResponse.append($sentimentText);
 			$('.responseContainer').prepend($sentimentResponse);
 			app.analyzeConcepts(tweetText);
