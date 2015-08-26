@@ -18,8 +18,11 @@ body {
    }
 
 h1 {
+    // margin: 0;
 	font-weight: 400;
     letter-spacing: 7px;
+    padding-left: 30px;
+    padding-right: 30px;
 	&:hover {
 		animation: pulse 4s infinite;
 	}
@@ -27,19 +30,25 @@ h1 {
 #onthe {
     font-size: 80px;
 }
- #pulse {
+
+#pulse {
         letter-spacing: 26px;
+        font-size: 130px;
+}
+@media (max-width: 550px){
+    #onthe{
+        font-size: 12vw;
     }
+    #pulse {
+        font-size: 18vw;
+    }
+}
 h2 {
 	font-weight: 300;
     letter-spacing: 1px;
 }
-h1.initial {
-	font-size: 130px;
-}
-h1.post {
-	font-size: 80px;
-}
+
+
 h2 {
 	font-size: 40px;
 	// padding: 25px 0;
@@ -49,19 +58,28 @@ h3 {
 	font-weight: 300;
     letter-spacing: 1px;
     font-size: 20px;
+
 }
 
 h4 {
-	margin: 40px 0 20px 0;
+	margin-top: 30px;
     font-size: 16px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
+.main-content {
+    height: 90vh;
+    padding:5vh 0 10vh;
+}
+
 
 // --------- Drop down header style -----------
 .header {
     background: black;
+
 }
 .btnContainer {
-	height: 35px;
+    padding: 20px;
 }
 .headerBtn{
     position: relative;
@@ -97,6 +115,9 @@ h4 {
 
 
 // ------ City Menu Styles --------
+.menu-container {
+    margin-top: 10vh;
+}
 #menu * { 
     padding:0; 
     margin: 0; 
@@ -149,8 +170,8 @@ h4 {
     float: left; 
     width: 146px; 
     font-weight: bold; 
-    border-top: solid 1px #292929; 
-    border-bottom: solid 1px #292929; 
+    border-top: solid 1px rgb(101, 100, 100);
+    border-bottom: solid 1px rgb(101, 100, 100);
     background: black;
 }
 #menu ul li a { 
@@ -206,37 +227,69 @@ h4 {
 // --------- Response Styles -------------
 .header-title {
     font-size: 30px;
+    padding: 20px;
+    margin: 0;
 }
 .city-name {
     font-size: 80px;
 }
 .responseContainer{
 	display: none;
+    font-weight: 300;
+    font-size: 18px;
+    margin: 20px auto;
+    background:rgba(0, 0, 0, 0.7);
+    border-top: solid 1px rgb(101, 100, 100);
+    border-bottom: solid 1px rgb(101, 100, 100);
+    padding: 30px 7vh;
+    width: 500px;
+    p {
+        padding-bottom: 20px;
+    }
+    a {
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+   @media (max-width: 600px) {
+    width: 400px;
+   }
+   @media (max-width: 400px) {
+    width: 300px;
+   }
 }
 .googleContainer {
     display: none;
     margin: 20px 0;
 }
-.trend h3 {
-    border-top: solid 1px #292929;
-    border-bottom: solid 1px #292929;
+.trend-name{
+    border-top: solid 1px rgb(101, 100, 100);
+    border-bottom: solid 1px rgb(101, 100, 100);
     border-radius: 5px;
     background: black;
     padding: 5px;
     width: 300px;
     display: inline-block;
     margin: 20px auto;
+    &:hover {
+        background: #252424;
+    }
+    @media (max-width: 990px) {
+        // width: 500px;
+    }
 }
+
 .googleSearch {
+    width: 300px;
+    display: block;
     color: white;
     text-decoration: none; 
     background: black;
     font-size: 16px;
     padding: 3px 10px;
-    border-top: solid 1px #292929;
-    border-bottom: solid 1px #292929;
+    border-top: solid 1px rgb(101, 100, 100);
+    border-bottom: solid 1px rgb(101, 100, 100);
     font-weight: 300;
-    margin-bottom: 10px;
+    margin: 0 auto 10px;
     &:hover {
         background: black;
         color: white;

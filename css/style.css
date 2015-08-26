@@ -185,6 +185,8 @@ body {
 h1 {
   font-weight: 400;
   letter-spacing: 7px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 h1:hover {
@@ -197,19 +199,21 @@ h1:hover {
 
 #pulse {
   letter-spacing: 26px;
+  font-size: 130px;
+}
+
+@media (max-width: 550px) {
+  #onthe {
+    font-size: 12vw;
+  }
+  #pulse {
+    font-size: 18vw;
+  }
 }
 
 h2 {
   font-weight: 300;
   letter-spacing: 1px;
-}
-
-h1.initial {
-  font-size: 130px;
-}
-
-h1.post {
-  font-size: 80px;
 }
 
 h2 {
@@ -224,8 +228,15 @@ h3 {
 }
 
 h4 {
-  margin: 40px 0 20px 0;
+  margin-top: 30px;
   font-size: 16px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.main-content {
+  height: 90vh;
+  padding: 5vh 0 10vh;
 }
 
 .header {
@@ -233,7 +244,7 @@ h4 {
 }
 
 .btnContainer {
-  height: 35px;
+  padding: 20px;
 }
 
 .headerBtn {
@@ -271,6 +282,10 @@ h4 {
 
 .info p {
   padding: 15px;
+}
+
+.menu-container {
+  margin-top: 10vh;
 }
 
 #menu * {
@@ -335,8 +350,8 @@ h4 {
   float: left;
   width: 146px;
   font-weight: bold;
-  border-top: solid 1px #292929;
-  border-bottom: solid 1px #292929;
+  border-top: solid 1px #656464;
+  border-bottom: solid 1px #656464;
   background: black;
 }
 
@@ -400,6 +415,8 @@ h4 {
 
 .header-title {
   font-size: 30px;
+  padding: 20px;
+  margin: 0;
 }
 
 .city-name {
@@ -408,6 +425,35 @@ h4 {
 
 .responseContainer {
   display: none;
+  font-weight: 300;
+  font-size: 18px;
+  margin: 20px auto;
+  background: rgba(0, 0, 0, 0.7);
+  border-top: solid 1px #656464;
+  border-bottom: solid 1px #656464;
+  padding: 30px 7vh;
+  width: 500px;
+}
+
+.responseContainer p {
+  padding-bottom: 20px;
+}
+
+.responseContainer a {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .responseContainer {
+    width: 400px;
+  }
+}
+
+@media (max-width: 400px) {
+  .responseContainer {
+    width: 300px;
+  }
 }
 
 .googleContainer {
@@ -415,9 +461,9 @@ h4 {
   margin: 20px 0;
 }
 
-.trend h3 {
-  border-top: solid 1px #292929;
-  border-bottom: solid 1px #292929;
+.trend-name {
+  border-top: solid 1px #656464;
+  border-bottom: solid 1px #656464;
   border-radius: 5px;
   background: black;
   padding: 5px;
@@ -426,16 +472,22 @@ h4 {
   margin: 20px auto;
 }
 
+.trend-name:hover {
+  background: #252424;
+}
+
 .googleSearch {
+  width: 300px;
+  display: block;
   color: white;
   text-decoration: none;
   background: black;
   font-size: 16px;
   padding: 3px 10px;
-  border-top: solid 1px #292929;
-  border-bottom: solid 1px #292929;
+  border-top: solid 1px #656464;
+  border-bottom: solid 1px #656464;
   font-weight: 300;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
 }
 
 .googleSearch:hover {

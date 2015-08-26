@@ -42,7 +42,7 @@ app.citySelect = function(){
 		$cityGeo = $(this).data('geo');
 		cityName=$(this).data('city');
 		$('.container h2').text(cityName).addClass('city-name');
-		$('#menu').hide();
+		$('.menu-container').hide();
 		$('#onthe').animate({
 			fontSize: '40px',
 
@@ -90,6 +90,7 @@ app.showTrends = function(trends){
 		var $trendImg = $('<img>');
 		$trendImg.addClass('trendImg'+index);
 		var $trendName = $('<h3>');
+		$trendName.addClass('trend-name')
 		$trendName.text(trend);
 		$trendContainer.append($trendImg, $trendName);
 		$('#trendsContainer').append($trendContainer);
@@ -191,7 +192,7 @@ app.analyzeSentiment = function(tweetText){
 		success: function(response){
 			var $sentimentResponse = $('<div>');
 			var $sentimentText = $('<p>');
-			$sentimentText.text("The current sentiment about this topic is "+ response.docSentiment.type + " with a score of " + response.docSentiment.score);
+			$sentimentText.text("Current mood: "+ response.docSentiment.type + " " + response.docSentiment.score);
 			$sentimentResponse.append($sentimentText);
 			$('.responseContainer').prepend($sentimentResponse);
 			app.analyzeConcepts(tweetText);
@@ -211,8 +212,9 @@ app.analyzeConcepts = function(tweetText){
 		},
 		success: function(response){
 			var $conceptResponse = $('<div>');
-			var conceptList = 'The top related concepts include:';
+			var conceptList = 'Related topics:';
 			for (var i=0; i < response.concepts.length; i++) {
+
 				conceptList = conceptList + " " + response.concepts[i].text + ",";
 			}
 			var $conceptText = $('<p>');
@@ -227,7 +229,7 @@ app.analyzeConcepts = function(tweetText){
 };  // End of tweet/alchemy train *******CHOO CHOO!!*****
 
 
-
+// Alchemy News search, not included in current version
 app.newsSearch = function(trend) {
 	var trendClean = trend.replace(/#/g,'');
 	trendClean = trendClean.replace(/([a-z])([A-Z])/g, '$1 $2');
