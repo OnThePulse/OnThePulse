@@ -213,7 +213,6 @@ h1:hover {
 
 h2 {
   font-weight: 300;
-  letter-spacing: 1px;
 }
 
 h2:hover {
@@ -417,6 +416,7 @@ h4 {
 
 .city-name {
   font-size: 80px;
+  text-transform: uppercase;
 }
 
 .responseContainer {
