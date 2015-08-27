@@ -231,15 +231,18 @@ h3 {
 }
 
 h4 {
-  margin-top: 30px;
+  margin-top: 20px;
   font-size: 16px;
   padding-left: 30px;
   padding-right: 30px;
 }
 
+h5 {
+  text-decoration: underline;
+}
+
 .main-content {
   height: 90vh;
-  padding: 5vh 0 10vh;
 }
 
 .header {
@@ -415,6 +418,7 @@ h4 {
 }
 
 .city-name {
+  margin-top: 15px;
   font-size: 80px;
   text-transform: uppercase;
 }
@@ -427,18 +431,27 @@ h4 {
   background: rgba(0, 0, 0, 0.7);
   border-top: solid 1px #656464;
   border-bottom: solid 1px #656464;
-  padding: 30px 7vh;
+  padding: 15px 7vh;
   width: 500px;
 }
 
+.responseContainer div {
+  margin-bottom: 10px;
+}
+
 .responseContainer p {
-  padding-bottom: 20px;
+  padding-bottom: 8px;
 }
 
 .responseContainer a {
   color: #666;
   display: inline-block;
   margin-bottom: 10px;
+}
+
+.responseContainer span {
+  margin: 3px;
+  border: 1px solid white;
 }
 
 @media (max-width: 600px) {
@@ -469,7 +482,8 @@ h4 {
   margin: 20px auto;
 }
 
-.trend-name:hover {
+.trend-name:hover,
+.googleSearch:hover {
   background: #252424;
 }
 

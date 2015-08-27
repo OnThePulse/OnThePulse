@@ -5,7 +5,6 @@ var flickrResponse = [];
 var trendImages = [];
 var currentTrend;
 var newsObject;
-var testArray = ['Pizza', 'Ballon', 'Chess'];
 
 
 app.infoMenu = function(){
@@ -163,6 +162,7 @@ app.getTweets = function(trend){
 	})
 };
 
+// Compile the most recent tweets about the topic into a single string for AlchemyAPI analysis
 app.compileTweets = function(tweets){
 	var compiledTweet = '';
 	$.each(tweets, function(i, tweetData){
@@ -179,6 +179,7 @@ app.compileTweets = function(tweets){
 	app.analyzeSentiment(compiledTweet);
 };
 
+//First call to the AlchemyAPI -> Sentiment
 app.analyzeSentiment = function(tweetText){
 	$.ajax({
 		url: 'http://access.alchemyapi.com/calls/text/TextGetTextSentiment',
@@ -191,10 +192,13 @@ app.analyzeSentiment = function(tweetText){
 		},
 		success: function(response){
 			var $sentimentResponse = $('<div>');
+			var $sentimentTitle = $('<h5>');
+			$sentimentTitle.text('Current mood:')
+			$sentimentResponse.append($sentimentTitle);
 			var $sentimentText = $('<p>');
 			var score = Number(response.docSentiment.score).toFixed(2);
-			var scorePercent = (score*100) + "%";
-			$sentimentText.text("Current mood: "+ response.docSentiment.type + " " + scorePercent);
+			var scorePercent = Math.abs((score*100)) + "%";
+			$sentimentText.text(response.docSentiment.type + "  -  " + scorePercent);
 			$sentimentResponse.append($sentimentText);
 			$('.responseContainer').prepend($sentimentResponse);
 			app.analyzeConcepts(tweetText);
@@ -202,6 +206,7 @@ app.analyzeSentiment = function(tweetText){
 	})
 };
 
+ // Second call to the AlchemyAPI -> Concepts
 app.analyzeConcepts = function(tweetText){
 	$.ajax({
 		url: 'http://access.alchemyapi.com/calls/text/TextGetRankedConcepts',
@@ -214,16 +219,16 @@ app.analyzeConcepts = function(tweetText){
 		},
 		success: function(response){
 			var $conceptResponse = $('<div>');
-			var conceptList = 'Related topics:';
+			var $conceptTitle = $('<h5>');
+			$conceptTitle.text('Related topics:')
+			$conceptResponse.append($conceptTitle);
 			for (var i=0; i < response.concepts.length; i++) {
 
-				conceptList = conceptList + " " + response.concepts[i].text + ",";
+				$conceptSingle = $('<span>');
+				$conceptSingle.text(response.concepts[i].text);
+				$conceptResponse.append($conceptSingle);
 			}
-			var $conceptText = $('<p>');
-			$conceptText.text(conceptList);
-			$conceptResponse.append($conceptText);
 			$('.responseContainer p').after($conceptResponse);
-			// app.newsSearch(currentTrend);
 			
 		}
 
@@ -263,6 +268,7 @@ app.newsSearch = function(trend) {
 	})
 };
 
+// Call to the New York Times API for news articles
 app.nytSearch = function(trend) {
 	var trendClean = trend.replace(/#/g,'');
 	trendClean = trendClean.replace(/([a-z])([A-Z])/g, '$1 $2');
@@ -280,6 +286,9 @@ app.nytSearch = function(trend) {
 		success: function (response) {
 			console.log(response);
 			var $newsResponse = $('<div>');
+			var $newsHeader = $('<h5>');
+			$newsHeader.text('New York Times Articles');
+			$newsResponse.append($newsHeader);
 			for (var i=0; i < 3;i++) {
 				var $newsBox = $('<div>');
 				var $newsItem = $('<a>');
@@ -292,22 +301,7 @@ app.nytSearch = function(trend) {
 	});
 }
 
-app.bingNewsSearch = function(trend) {
-	$.ajax({
-		url:'https://api.datamarket.azure.com/Bing/Search/Web?Query=%27Xbox%27&$format=json',
-		type: 'GET',
-		dataType: 'jsonp',
-		data: {
-			// Appid: '5iKiicIzdChbjnJltroylQ7Zvc3H4X3d8HbUdc7nJHk',
-			// query: 'trend',
-			// $format: 'json'
-		},
-		success: function(response) {
-			console.log(response);
-		}
-	})
-}
-
+// Google search button for trend (hashtag removed)
 app.googleSearch = function(trend) {
 	var trendClean = trend.replace(/#/g,'');
 	var googleUrl = 'https://www.google.ca/search?q='+trendClean+'&oq=create&aqs=chrome.0.69i59l2j69i60j69i65l2j69i61.741j0j9&sourceid=chrome&es_sm=91&ie=UTF-8';
