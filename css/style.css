@@ -426,17 +426,13 @@ h5 {
 .responseContainer {
   display: none;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 16px;
   margin: 20px auto;
   background: rgba(0, 0, 0, 0.7);
   border-top: solid 1px #656464;
   border-bottom: solid 1px #656464;
   padding: 15px 7vh;
   width: 500px;
-}
-
-.responseContainer div {
-  margin-bottom: 10px;
 }
 
 .responseContainer p {
@@ -446,12 +442,6 @@ h5 {
 .responseContainer a {
   color: #666;
   display: inline-block;
-  margin-bottom: 10px;
-}
-
-.responseContainer span {
-  margin: 3px;
-  border: 1px solid white;
 }
 
 @media (max-width: 600px) {
@@ -464,6 +454,21 @@ h5 {
   .responseContainer {
     width: 300px;
   }
+}
+
+.alchemyResponse {
+  margin-bottom: 15px;
+}
+
+.alchemyResponse p {
+  font-size: 23px;
+}
+
+.conceptSingle {
+  display: inline-block;
+  border: 1px solid white;
+  margin: 5px;
+  padding: 2px;
 }
 
 .googleContainer {
@@ -482,11 +487,6 @@ h5 {
   margin: 20px auto;
 }
 
-.trend-name:hover,
-.googleSearch:hover {
-  background: #252424;
-}
-
 .googleSearch {
   width: 300px;
   display: block;
@@ -502,7 +502,6 @@ h5 {
 }
 
 .googleSearch:hover {
-  background: black;
   color: white;
   text-decoration: none;
 }
@@ -510,4 +509,9 @@ h5 {
 .googleSearch:active {
   color: white;
   text-decoration: none;
+}
+
+.trend-name:hover,
+.googleSearch:hover {
+  background: #252424;
 }

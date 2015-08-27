@@ -192,6 +192,7 @@ app.analyzeSentiment = function(tweetText){
 		},
 		success: function(response){
 			var $sentimentResponse = $('<div>');
+			$sentimentResponse.addClass('alchemyResponse');
 			var $sentimentTitle = $('<h5>');
 			$sentimentTitle.text('Current mood:')
 			$sentimentResponse.append($sentimentTitle);
@@ -224,7 +225,8 @@ app.analyzeConcepts = function(tweetText){
 			$conceptResponse.append($conceptTitle);
 			for (var i=0; i < response.concepts.length; i++) {
 
-				$conceptSingle = $('<span>');
+				$conceptSingle = $('<div>');
+				$conceptSingle.addClass('conceptSingle');
 				$conceptSingle.text(response.concepts[i].text);
 				$conceptResponse.append($conceptSingle);
 			}
