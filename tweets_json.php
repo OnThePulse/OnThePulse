@@ -1,14 +1,11 @@
 <?php
 require 'tmhOAuth.php'; // Get it from: https://github.com/themattharris/tmhOAuth
 
-// Use the data from http://dev.twitter.com/apps to fill out this info
-// notice the slight name difference in the last two items)
-
 $connection = new tmhOAuth(array(
-  'consumer_key' => '',
-	'consumer_secret' => '',
-	'user_token' => '', //access token
-	'user_secret' => '' //access token secret
+  'consumer_key' => 'JNMDHTj7LA8Dk0h6ejIKq1XfV',
+	'consumer_secret' => 'JLnObZL7OWlgRkRT6eTQ4vCdqYDfEKHChYYF1tsqgAGEORxsIn',
+	'user_token' => '37882786-A5geJylvQiDqbDGfMZbLfID8eAkEU0v4HjJNheV0U', //access token
+	'user_secret' => 'NAFCUtNjE5ra2uzRK6NvsFyGoU8HpWieIEdZh64y4uCFG' //access token secret
 ));
 
 // set up parameters to pass
@@ -18,26 +15,29 @@ if ($_GET['count']) {
 	$parameters['count'] = strip_tags($_GET['count']);
 }
 
-if ($_GET['screen_name']) {
-	$parameters['screen_name'] = strip_tags($_GET['screen_name']);
-}
 if ($_GET['q']) {
 	$parameters['q'] = strip_tags($_GET['q']);
 }
-
+// if ($_GET['lang']) {
+// 	$parameters['lang'] = strip_tags($_GET['lang']);
+// }
 if ($_GET['geocode']) {
 	$parameters['geocode'] = strip_tags($_GET['geocode']);
 }
+
+if ($_GET['result_type']) {
+	$parameters['result_type'] = strip_tags($_GET['result_type']);
+}
+
 
 if ($_GET['twitter_path']) { $twitter_path = $_GET['twitter_path']; }  else {
 	$twitter_path = '1.1/statuses/user_timeline.json';
 }
 
-
-
-
+// $twitter_path = '1.1/statuses/user_timeline.json';
 
 $http_code = $connection->request('GET', $connection->url($twitter_path), $parameters );
+
 
 if ($http_code === 200) { // if everything's good
 	$response = strip_tags($connection->response['response']);
