@@ -75,6 +75,7 @@ app.getTrends = function(){
 			};
 			// app.getImages(cityTrends);
 			app.showTrends(cityTrends);
+			console.log("get trends");
 		}
 	})
 };
