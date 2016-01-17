@@ -80,7 +80,7 @@ app.getTrends = function(){
 			app.showTrends(cityTrends);
 		},
 		error: function(){
-        alert("failure");
+        alert("Trend ajax call has failed");
     }
 		
 	})
