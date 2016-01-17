@@ -82,6 +82,7 @@ app.getTrends = function(){
 
 // Show the trends on the page
 app.showTrends = function(trends){
+	console.log("test");
 	$('#trendsContainer').empty();
 	$.each(trends, function(index, trend){
 		var $trendContainer = $('<div>');
