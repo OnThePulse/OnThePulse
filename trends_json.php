@@ -14,8 +14,6 @@ $settings = array(
 $url = "https://api.twitter.com/1.1/trends/place.json";
 $requestMethod = "GET";
 
-// if (isset($_GET['q'])) {$q = $_GET['q'];} else {$q = trend;}
-// if (isset($_GET['count'])) {$count = $_GET['count'];} else {$count = 20;}
 if (isset($_GET['id'])) {$id = $_GET['id'];} else {$id = 4118;}
 
 $getfield = "?id=$id";

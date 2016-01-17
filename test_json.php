@@ -1,13 +1,5 @@
 <?php
-// require 'tmhOAuth.php'; // Get it from: https://github.com/themattharris/tmhOAuth
 require_once('TwitterAPIExchange.php');
-
-// $connection = new tmhOAuth(array(
-//   'consumer_key' => 'JNMDHTj7LA8Dk0h6ejIKq1XfV',
-// 	'consumer_secret' => 'JLnObZL7OWlgRkRT6eTQ4vCdqYDfEKHChYYF1tsqgAGEORxsIn',
-// 	'user_token' => '37882786-A5geJylvQiDqbDGfMZbLfID8eAkEU0v4HjJNheV0U', //access token
-// 	'user_secret' => 'NAFCUtNjE5ra2uzRK6NvsFyGoU8HpWieIEdZh64y4uCFG' //access token secret
-// ));
 
 
 /** Set access tokens here - see: https://dev.twitter.com/apps/ **/

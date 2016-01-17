@@ -55,6 +55,7 @@ app.citySelect = function(){
 		$('h4').text('SELECT A TREND');
 		});
 		app.getTrends();
+
 	});
 };
 
@@ -69,14 +70,19 @@ app.getTrends = function(){
 			twitter_path: 'https://api.twitter.com/1.1/trends/place.json',
 			id: $cityID,
 		},
+
 		success: function(response){
+			console.log("get trends");
 			for(var i=0;i<3;i++){
 				cityTrends[i]=response[0].trends[i].name;
 			};
 			// app.getImages(cityTrends);
 			app.showTrends(cityTrends);
-			console.log("get trends");
-		}
+		},
+		error: function(){
+        alert("failure");
+    }
+		
 	})
 };
 
@@ -111,7 +117,7 @@ app.trend0Select = function(){
 		currentTrend = cityTrends[0];
 		app.getTweets(currentTrend);
 		// app.newsSearch(currentTrend);
-		app.nytSearch(currentTrend);
+		// app.nytSearch(currentTrend);
 		app.googleSearch(currentTrend);
 		$('.responseContainer').empty()
 	});
@@ -124,7 +130,7 @@ app.trend1Select = function(){
 		currentTrend = cityTrends[1];
 		app.getTweets(currentTrend);
 		// app.newsSearch(currentTrend);
-		app.nytSearch(currentTrend);
+		// app.nytSearch(currentTrend);
 		app.googleSearch(currentTrend);
 		$('.responseContainer').empty()
 	});
@@ -137,7 +143,7 @@ app.trend2Select = function(){
 		currentTrend = cityTrends[2];
 		app.getTweets(currentTrend);
 		// app.newsSearch(currentTrend);
-		app.nytSearch(currentTrend);
+		// app.nytSearch(currentTrend);
 		app.googleSearch(currentTrend);
 		$('.responseContainer').empty()
 	});
@@ -160,7 +166,10 @@ app.getTweets = function(trend){
 		success : function(response){
 			// console.log(response);
 			app.compileTweets(response);
-		}
+		},
+		error: function(){
+        alert("failure");
+    }
 	})
 };
 
